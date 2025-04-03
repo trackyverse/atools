@@ -1,0 +1,23 @@
+Package: atools
+Title: Tools to Manipulate ATO
+Version: 0.0.0.9001
+Authors@R: c(person("Hugo", "Flávio", role = c("aut", "cre"), email = "hflavio@dal.ca"))
+Description: Provides tools to manipulate ATO objects. Includes functions for filtering, excluding, and additional calculations.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Language: en-GB
+Depends: R (>= 4.0.0)
+Imports:
+    ATO,
+    stats,
+    data.table,
+    utils,
+    methods
+Suggests:
+    testthat
+URL: https://github.com/trackyverse/atools,
+     http://www.trackyverse.com/atools
+BugReports: https://github.com/trackyverse/atools/issues
