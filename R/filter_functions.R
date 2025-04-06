@@ -25,7 +25,8 @@ filter_det <- function(object, ..., hard = FALSE) {
   }
 
   filter_vec <- .create_filter_vec(object, checks, "det")
-  object <- .apply_filter(object, filter_vec, "det", hard = hard)
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "det", hard = hard)
   
   return(object)
 }
@@ -53,7 +54,8 @@ filter_dep <- function(object, ...) {
   }
 
   filter_vec <- .create_filter_vec(object, checks, "dep")
-  object <- .apply_filter(object, filter_vec, "dep", hard = TRUE)
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "dep", hard = TRUE)
 
   return(object)
 }
@@ -85,7 +87,8 @@ filter_obs <- function(object, ..., hard = FALSE) {
   }
 
   filter_vec <- .create_filter_vec(object, checks, "obs")
-  object <- .apply_filter(object, filter_vec, "obs", hard)
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "obs", hard)
 
   return(object)
 }
@@ -113,7 +116,8 @@ filter_ping_dev <- function(object, bands, grace, hard = FALSE) {
                      "]")
     eval(parse(text = to_run))
 
-    object <- .apply_filter(object, checker$valid, "det", hard = hard)
+    object <- .apply_filter(object, checker$valid, exclude = FALSE,
+                          slt = "det", hard = hard)
   }
   return(object)
 }
@@ -199,10 +203,11 @@ filter_reset <- function(object) {
   is_ato(object)
   has(object, "det", error = TRUE)
 
+  if (all(object@det$valid)) {
+    message("M: All ", nrow(object@det), " detections are already valid.")
+  }
   # use data.table for fast processing
   object@det$valid <- TRUE
-  
-  message("M: All ", nrow(object@det), " detections switched back to valid.")
-  
+
   return(object)
 }
