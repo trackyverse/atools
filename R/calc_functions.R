@@ -17,8 +17,13 @@ calc_det_interval <- function(object) {
       # cat(" - ", tag$transmitter[1], "\n")
       tag <- tag[order(tag$datetime), ]
       tag$datetime_num <- as.numeric(tag$datetime) + tag$frac_second
+      # the first detection has no previous to be matched against
       tag$time_diff <- c(NA,
                          tag$datetime_num[-1] - tag$datetime_num[-nrow(tag)])
+      # The NAs can trip filtering functions though, so give the first
+      # detection the same interval as the second. This ensures that
+      # both are kept in the event of filtering.
+      tag$time_diff[1] <- tag$time_diff[2]
       
       ping_rate <- NA
       tag_link <- object@tag$transmitter == tag$transmitter[1]
@@ -31,7 +36,7 @@ calc_det_interval <- function(object) {
       }
       if (!is.na(ping_rate)) {
         tag$ping_dev <- tag$time_diff %% ping_rate
-        dev_link <- c(FALSE, tag$ping_dev[-1] > (ping_rate / 2))
+        dev_link <- c(tag$ping_dev > (ping_rate / 2))
         tag$ping_dev[dev_link] <- ping_rate - tag$ping_dev[dev_link]
       } else {
         tag$ping_dev <- NA
@@ -42,7 +47,6 @@ calc_det_interval <- function(object) {
     return(output)
   })
   output <- data.table::rbindlist(recipient1)
-  output <- as.data.frame(output)
   class(output) <- class(object@det)
   object@det <- output
   return(object)
