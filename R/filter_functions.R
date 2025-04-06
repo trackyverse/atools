@@ -87,7 +87,6 @@ filter_obs <- function(object, ..., hard = FALSE) {
   filter_vec <- .create_filter_vec(object, checks, "obs")
   object <- .apply_filter(object, filter_vec, "obs", hard)
 
-  rm(obs)
   return(object)
 }
 

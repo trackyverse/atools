@@ -4,7 +4,7 @@
 #' @import data.table
 #' @import stats
 #' @import utils
-#' @importFrom methods is
+#' @importFrom methods is slot slot<-
 #'
 #' @keywords internal
 #'

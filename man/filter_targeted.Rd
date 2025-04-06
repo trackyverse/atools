@@ -3,7 +3,7 @@
 \name{filter_targeted}
 \alias{filter_targeted}
 \title{Wrapper to filter detections and observations that match the
-transmitters in the tag slot.}
+transmitters in the tag and dep slots.}
 \usage{
 filter_targeted(object, hard = FALSE)
 }
@@ -20,5 +20,5 @@ the updated ATO
 }
 \description{
 Wrapper to filter detections and observations that match the
-transmitters in the tag slot.
+transmitters in the tag and dep slots.
 }

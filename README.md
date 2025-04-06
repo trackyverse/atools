@@ -1,4 +1,4 @@
-# Tools to manipulate ATO <img src="atools_logo_150.png" align="right" width="120" />
+# Tools to manipulate ATO <img src="vignettes/atools_logo_150.png" align="right" width="120" />
 
 This repository is a fastly evolving work in progress.
 
