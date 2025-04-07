@@ -16,6 +16,8 @@ Imports:
     data.table,
     utils,
     methods
+Remotes:
+    trackyverse/ATO
 Suggests:
     testthat
 URL: https://github.com/trackyverse/atools,
