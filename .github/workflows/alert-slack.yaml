@@ -10,6 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Notify Slack
-        uses: trackyverse/action-otn-slack-post@c7cdb15c73f1eda16e45f1f2c80316024caedcfb
+        uses: trackyverse/action-otn-slack-post@d0482a50bd335417a67ba10bfc9f14ef3c0da1d4
         with:
           bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
