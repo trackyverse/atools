@@ -8,10 +8,8 @@ name: "Post on #trackydev"
 jobs:
   post_slack:
     runs-on: ubuntu-latest
-    env:
-      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     steps:
       - name: Notify Slack
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data "{'text':'Changes pushed to ${{ github.repository }}. See them here: ${{ github.server_url }}/${{ github.repository }}/pull/${{ github.event.pull_request.number }}'}" $SLACK_BOT_TOKEN
+        uses: trackyverse/action-otn-slack-post@c7cdb15c73f1eda16e45f1f2c80316024caedcfb
+        with:
+          bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
