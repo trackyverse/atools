@@ -4,14 +4,14 @@
 \alias{.create_filter_vec}
 \title{worker function to create filtering vector}
 \usage{
-.create_filter_vec(object, checks, type = c("det", "dep", "tag", "ani", "obs"))
+.create_filter_vec(object, checks, slt = c("det", "dep", "tag", "ani", "obs"))
 }
 \arguments{
 \item{object}{an ATO}
 
 \item{checks}{a list of column names and respective values to filter with}
 
-\item{type}{the ATO slot to filter}
+\item{slt}{the ATO slot to filter}
 }
 \value{
 a logical vector
