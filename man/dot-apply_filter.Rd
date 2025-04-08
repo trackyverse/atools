@@ -6,18 +6,21 @@
 \usage{
 .apply_filter(
   object,
-  new_valid,
-  type = c("det", "dep", "tag", "ani", "obs"),
+  filter_vec,
+  exclude,
+  slt = c("det", "dep", "tag", "ani", "obs"),
   hard = FALSE
 )
 }
 \arguments{
 \item{object}{an ATO}
 
-\item{new_valid}{a logical vector, normally created by
+\item{filter_vec}{a logical vector, normally created by
 \code{\link{.create_filter_vec}}.}
 
-\item{type}{the ATO slot to filter}
+\item{exclude}{FALSE to filter by filter_vec, TRUE to exclude by filter_vec.}
+
+\item{slt}{the ATO slot to filter}
 
 \item{hard}{Should the filtering mark rows as invalid (FALSE) or remove them
 altogether (TRUE)}
