@@ -20,6 +20,5 @@ Remotes:
     trackyverse/ATO
 Suggests:
     testthat
-URL: https://github.com/trackyverse/atools,
-     http://www.trackyverse.com/atools
+URL: https://github.com/trackyverse/atools, http://atools.trackyverse.org
 BugReports: https://github.com/trackyverse/atools/issues
