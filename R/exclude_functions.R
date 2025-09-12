@@ -39,6 +39,34 @@ exclude_det <- function(object, ..., hard = FALSE) {
   return(object)
 }
 
+#' Wrapper to exclude detections that to not match the deployments
+#'
+#' @param object an \code{\link[ATO]{ATO}}
+#' @param hard If false (the default), detections are flagged as invalid through
+#'   the invalid column, but kept in the dataset. Switch to true to completely
+#'   remove the detections from the dataset (useful to improve performance when
+#'   handling very large datasets).
+#' 
+#' @return the updated ATO
+#'
+#' @export
+#'
+exclude_orphan_dets <- function(object, hard = FALSE) {
+  is_ato(object)
+  has(object, "det", error = TRUE)
+
+  filter_vec <- is.na(get_det(object)$dep_match)
+  object <- .apply_filter(
+    object,
+    filter_vec,
+    exclude = TRUE,
+    slt = "det",
+    hard = hard
+  )
+
+  return(object)
+}
+
 #' Exclude rows from the @dep slot
 #'
 #' @param object an \code{\link[ATO]{ATO}}
