@@ -101,6 +101,8 @@ filter_obs <- function(object, ..., hard = FALSE) {
 #' 
 #' @return the updated ATO
 #' 
+#' @export
+#'
 filter_ping_dev <- function(object, bands, grace, hard = FALSE) {
   band_list <- lapply(bands, function(i) c(i - grace, i + grace))
   if (!has(object, "det")) {
