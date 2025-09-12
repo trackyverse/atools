@@ -124,7 +124,7 @@
       rm(filtered)
     } else {
       if (exclude) {
-        new_total <- sum(slot(object, det)$valid & !filter_vec)
+        new_total <- sum(slot(object, slt)$valid & !filter_vec)
       }
       slot(object, slt)$valid[!filter_vec] <- FALSE
       if (!exclude) {    
