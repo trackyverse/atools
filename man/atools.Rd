@@ -12,7 +12,7 @@ Provides tools to manipulate ATO objects. Includes functions for filtering, excl
 Useful links:
 \itemize{
   \item \url{https://github.com/trackyverse/atools}
-  \item \url{http://www.trackyverse.com/atools}
+  \item \url{http://atools.trackyverse.org}
   \item Report bugs at \url{https://github.com/trackyverse/atools/issues}
 }
 
