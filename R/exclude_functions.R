@@ -99,5 +99,8 @@ exclude_dep <- function(object, ...) {
     hard = TRUE
   )
 
+  if (has(object, "det", error = FALSE)) {
+    object <- match_det_dep(object, silent = TRUE)
+  }
   return(object)
 }

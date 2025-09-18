@@ -125,11 +125,11 @@
     } else {
       if (exclude) {
         new_total <- sum(slot(object, slt)$valid & !filter_vec)
-      }
-      slot(object, slt)$valid[!filter_vec] <- FALSE
-      if (!exclude) {    
+      } else {
         new_total <- sum(slot(object, slt)$valid)
       }
+      slot(object, slt)$valid[!filter_vec] <- FALSE
+
       message(ifelse(exclude,
                      "M: Rendered ", 
                      "M: "), 
