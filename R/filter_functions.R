@@ -121,6 +121,10 @@ filter_ping_dev <- function(object, bands, grace, hard = FALSE) {
     object <- .apply_filter(object, checker$valid, exclude = FALSE,
                           slt = "det", hard = hard)
   }
+  if (any(object@det$time_diff[object@det$valid] < 0.5)) {
+    message("Note: Valid detections with very small ping intervals (>500ms)",
+            " found. Could these be reflections?")
+  }
   return(object)
 }
 
