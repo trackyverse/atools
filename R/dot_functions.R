@@ -109,7 +109,7 @@
 
   if (all(filter_vec)) {
     if (exclude) {
-    message("M: No ", longslot, " match the exclusion criteria.")
+      message("M: No ", longslot, " match the exclusion criteria.")
     } else {
       message("M: All ", longslot, " match the filtering criteria.")
     }
@@ -126,7 +126,7 @@
               .dyn_round(new_total / old_total * 100),
               "%).")
       # using add is an easy way to trigger the match checks again
-      object <- add(object, filtered)
+      object <- add(object, filtered, silent = TRUE)
       rm(filtered)
     } else {
       if (exclude) {
