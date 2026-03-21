@@ -4,12 +4,20 @@
 
 - [`calc_det_interval()`](https://atools.trackyverse.org/reference/calc_det_interval.md)
   : Calculate time interval between detections
+- [`exclude_ani()`](https://atools.trackyverse.org/reference/exclude_ani.md)
+  : Exclude rows from the @ani slot
 - [`exclude_dep()`](https://atools.trackyverse.org/reference/exclude_dep.md)
   : Exclude rows from the @dep slot
 - [`exclude_det()`](https://atools.trackyverse.org/reference/exclude_det.md)
   : Exclude rows from the @det slot
+- [`exclude_obs()`](https://atools.trackyverse.org/reference/exclude_obs.md)
+  : Exclude rows from the @obs slot
 - [`exclude_orphan_dets()`](https://atools.trackyverse.org/reference/exclude_orphan_dets.md)
   : Wrapper to exclude detections that to not match the deployments
+- [`exclude_tag()`](https://atools.trackyverse.org/reference/exclude_tag.md)
+  : Exclude rows from the @tag slot
+- [`filter_ani()`](https://atools.trackyverse.org/reference/filter_ani.md)
+  : Filter rows from the @ani slot
 - [`filter_datetime()`](https://atools.trackyverse.org/reference/filter_datetime.md)
   : Wrapper to filter detections and observations within the desired
   time period
@@ -23,6 +31,8 @@
   : wrapper to filter detections by ping deviation bands
 - [`filter_reset()`](https://atools.trackyverse.org/reference/filter_reset.md)
   : Clear all previously applied (non-hard) filters
+- [`filter_tag()`](https://atools.trackyverse.org/reference/filter_tag.md)
+  : Filter rows from the @tag slot
 - [`filter_targeted()`](https://atools.trackyverse.org/reference/filter_targeted.md)
   : Wrapper to filter detections and observations that match the
   transmitters in the tag and dep slots.
