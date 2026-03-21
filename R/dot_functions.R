@@ -45,15 +45,21 @@
               immediate. = TRUE, call. = FALSE)
     } else {
       eval_cols <- c(eval_cols, paste0("filter_check_", i))
-      if (length(checks[[i]]) == 2 & is.double(checks[[i]])) {
+      if (is.na(checks[[i]])) {
         to_run <- paste0("checker[, filter_check_", i,
-                         " := ",
-                         i, " >= checks[[i]][1] & ",
-                         i, " <= checks[[i]][2]]")
+                         " := is.na(", i, ")]")
       } else {
-        to_run <- paste0("checker[, filter_check_", i,
-                         " := ",
-                         i, " %in% checks[[i]]]")
+        if (length(checks[[i]]) == 2 &
+            (is.double(checks[[i]]) | is.integer(checks[[i]]))) {
+          to_run <- paste0("checker[, filter_check_", i,
+                           " := ",
+                           i, " >= checks[[i]][1] & ",
+                           i, " <= checks[[i]][2]]")
+        } else {
+          to_run <- paste0("checker[, filter_check_", i,
+                           " := ",
+                           i, " %in% checks[[i]]]")
+        }
       }
     }
     eval(parse(text = to_run))

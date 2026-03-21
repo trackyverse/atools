@@ -1,3 +1,83 @@
+#' Filter rows from the @ani slot
+#' 
+#' @param object an \code{\link[ATO]{ATO}}
+#' @param ... named arguments to filter for. The argument's name must match
+#'   one of the column names in the animals slot. If only one value is provided,
+#'   data is filtered by exact match. If two values are provided for continuous
+#'   variables, data is filtered within the interval provided. If three or more
+#'   values are provided, data is filtered by exact match.
+#' @param hard If false (the default), animal rows are flagged as invalid
+#'   through the valid column, but kept in the dataset. Switch to true to drop
+#'   the tags that do not fit the filtering criteria (useful to improve 
+#'   performance when handling very large datasets).
+#' 
+#' @return the updated ATO
+#' 
+#' @export
+#' 
+filter_ani <- function(object, ..., hard = FALSE) {
+  is_ato(object)
+  has(object, "ani", error = TRUE)
+  
+  checks <- list(...)
+  if (length(checks) == 0) {
+    stop("No filtering arguments provided.", call. = FALSE)
+  }
+
+  filter_vec <- .create_filter_vec(object, checks, "ani")
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "ani", hard)
+
+  if (has(object, "det")) {
+    object <- match_det_ani(object, silent = TRUE)
+  }
+  if (has(object, "obs")) {
+    object <- match_obs_ani(object, silent = TRUE)
+  }
+  if (has(object, "tag")) {
+    object <- match_tag_ani(object, silent = TRUE)
+  }
+  return(object)
+}
+
+#' Filter rows from the @dep slot
+#' 
+#' @param object an \code{\link[ATO]{ATO}}
+#' @param ... named arguments to filter for. The argument's name must match
+#'   one of the column names in the deployments If only one value is provided,
+#'   data is filtered by exact match. If two values are provided for continuous
+#'   variables, data is filtered within the interval provided. If three or more
+#'   values are provided, data is filtered by exact match.
+#' 
+#' @return the updated ATO
+#' 
+#' @export
+#' 
+filter_dep <- function(object, ...) {
+  is_ato(object)
+  has(object, "dep", error = TRUE)
+
+  checks <- list(...)
+  if (length(checks) == 0) {
+    stop("No filtering arguments provided.", call. = FALSE)
+  }
+
+  filter_vec <- .create_filter_vec(object, checks, "dep")
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "dep", hard = TRUE)
+
+  if (has(object, "det")) {
+    # reset tag match. There's probably a 
+    # more efficient way of doing this
+    object@det$tag_match <- NULL
+    object <- match_det_dep(object, silent = TRUE)
+    if (has(object, "tag")) {
+      object <- match_det_tag(object, silent = TRUE)
+    }
+  }
+  return(object)
+}
+
 #' Filter rows from the @det slot
 #' 
 #' @param object an \code{\link[ATO]{ATO}}
@@ -28,35 +108,15 @@ filter_det <- function(object, ..., hard = FALSE) {
   object <- .apply_filter(object, filter_vec, exclude = FALSE,
                           slt = "det", hard = hard)
   
-  return(object)
-}
-
-#' Filter rows from the @dep slot
-#' 
-#' @param object an \code{\link[ATO]{ATO}}
-#' @param ... named arguments to filter for. The argument's name must match
-#'   one of the column names in the deployments If only one value is provided,
-#'   data is filtered by exact match. If two values are provided for continuous
-#'   variables, data is filtered within the interval provided. If three or more
-#'   values are provided, data is filtered by exact match.
-#' 
-#' @return the updated ATO
-#' 
-#' @export
-#' 
-filter_dep <- function(object, ...) {
-  is_ato(object)
-  has(object, "dep", error = TRUE)
-
-  checks <- list(...)
-  if (length(checks) == 0) {
-    stop("No filtering arguments provided.", call. = FALSE)
+  if (has(object, "ani")) {
+    object <- match_det_ani(object, silent = TRUE)
   }
-
-  filter_vec <- .create_filter_vec(object, checks, "dep")
-  object <- .apply_filter(object, filter_vec, exclude = FALSE,
-                          slt = "dep", hard = TRUE)
-
+  if (has(object, "tag")) {
+    object <- match_det_tag(object, silent = TRUE)
+  }
+  if (has(object, "dep")) {
+    object <- match_det_dep(object, silent = TRUE)
+  }
   return(object)
 }
 
@@ -90,6 +150,54 @@ filter_obs <- function(object, ..., hard = FALSE) {
   object <- .apply_filter(object, filter_vec, exclude = FALSE,
                           slt = "obs", hard)
 
+  if (has(object, "tag")) {
+    object <- match_obs_tag(object, silent = TRUE)
+  }
+  if (has(object, "ani")) {
+    object <- match_obs_ani(object, silent = TRUE)
+  }
+  return(object)
+}
+
+#' Filter rows from the @tag slot
+#' 
+#' @param object an \code{\link[ATO]{ATO}}
+#' @param ... named arguments to filter for. The argument's name must match
+#'   one of the column names in the tags slot. If only one value is provided,
+#'   data is filtered by exact match. If two values are provided for continuous
+#'   variables, data is filtered within the interval provided. If three or more
+#'   values are provided, data is filtered by exact match.
+#' @param hard If false (the default), tag rows are flagged as invalid
+#'   through the valid column, but kept in the dataset. Switch to true to drop
+#'   the tags that do not fit the filtering criteria (useful to improve 
+#'   performance when handling very large datasets).
+#' 
+#' @return the updated ATO
+#' 
+#' @export
+#' 
+filter_tag <- function(object, ..., hard = FALSE) {
+  is_ato(object)
+  has(object, "tag", error = TRUE)
+  
+  checks <- list(...)
+  if (length(checks) == 0) {
+    stop("No filtering arguments provided.", call. = FALSE)
+  }
+
+  filter_vec <- .create_filter_vec(object, checks, "tag")
+  object <- .apply_filter(object, filter_vec, exclude = FALSE,
+                          slt = "tag", hard)
+
+  if (has(object, "det")) {
+    object <- match_det_tag(object, silent = TRUE)
+  }
+  if (has(object, "obs")) {
+    object <- match_obs_tag(object, silent = TRUE)
+  }
+  if (has(object, "ani")) {
+    object <- match_tag_ani(object, silent = TRUE)
+  }
   return(object)
 }
 

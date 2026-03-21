@@ -19,5 +19,5 @@ values are provided, data is filtered by exact match.}
 the updated ATO
 }
 \description{
-Exclude rows from the @dep slot
+If exclusion parameters are not provided, removes the entire slot.
 }
