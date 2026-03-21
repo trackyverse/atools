@@ -45,7 +45,7 @@
               immediate. = TRUE, call. = FALSE)
     } else {
       eval_cols <- c(eval_cols, paste0("filter_check_", i))
-      if (is.na(checks[[i]])) {
+      if (length(checks[[i]]) == 1 && is.na(checks[[i]])) {
         to_run <- paste0("checker[, filter_check_", i,
                          " := is.na(", i, ")]")
       } else {
