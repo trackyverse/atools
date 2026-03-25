@@ -13,9 +13,9 @@ filter_ping_dev(object, bands, grace, hard = FALSE)
 
 \item{grace}{width of the bands to extract}
 
-\item{hard}{If false (the default), detections are flagged as invalid through
-the invalid column, but kept in the dataset. Switch to true to drop
-detections that do not fit the filtering criteria (useful to improve
+\item{hard}{If false (the default), animal rows are flagged as invalid
+through the valid column, but kept in the dataset. Switch to true to drop
+the tags that do not fit the filtering criteria (useful to improve
 performance when handling very large datasets).}
 }
 \value{

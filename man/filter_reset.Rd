@@ -4,10 +4,12 @@
 \alias{filter_reset}
 \title{Clear all previously applied (non-hard) filters}
 \usage{
-filter_reset(object)
+filter_reset(object, s)
 }
 \arguments{
 \item{object}{an \code{\link[ATO]{ATO}}}
+
+\item{s}{the slot to be reset. If not provided, all slots are reset.}
 }
 \value{
 the updated ATO
