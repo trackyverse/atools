@@ -5,7 +5,7 @@ Clear all previously applied (non-hard) filters
 ## Usage
 
 ``` r
-filter_reset(object)
+filter_reset(object, s)
 ```
 
 ## Arguments
@@ -14,6 +14,10 @@ filter_reset(object)
 
   an
   [`ATO`](https://trackyverse.github.io/ATO/reference/ATO_package.html)
+
+- s:
+
+  the slot to be reset. If not provided, all slots are reset.
 
 ## Value
 

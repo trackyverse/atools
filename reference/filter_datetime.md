@@ -28,10 +28,10 @@ filter_datetime(object, from = "1970-01-01", to = "3000-01-01", hard = FALSE)
 
 - hard:
 
-  If false (the default), detections are flagged as invalid through the
-  invalid column, but kept in the dataset. Switch to true to drop
-  detections that do not fit the filtering criteria (useful to improve
-  performance when handling very large datasets).
+  If false (the default), animal rows are flagged as invalid through the
+  valid column, but kept in the dataset. Switch to true to drop the tags
+  that do not fit the filtering criteria (useful to improve performance
+  when handling very large datasets).
 
 ## Value
 

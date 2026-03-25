@@ -9,7 +9,7 @@ Worker function to apply filtering
   object,
   filter_vec,
   exclude,
-  slt = c("det", "dep", "tag", "ani", "obs"),
+  slt = c("ani", "dep", "det", "tag", "obs"),
   hard = FALSE
 )
 ```
@@ -22,8 +22,7 @@ Worker function to apply filtering
 
 - filter_vec:
 
-  a logical vector, normally created by
-  [`.create_filter_vec`](https://atools.trackyverse.org/reference/dot-create_filter_vec.md).
+  a logical vector, normally created by `.create_filter_vec`.
 
 - exclude:
 
