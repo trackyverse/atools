@@ -22,7 +22,8 @@ Worker function to apply filtering
 
 - filter_vec:
 
-  a logical vector, normally created by `.create_filter_vec`.
+  a logical vector, normally created by
+  [`create_filter_vec`](https://atools.trackyverse.org/reference/create_filter_vec.md).
 
 - exclude:
 
