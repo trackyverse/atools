@@ -16,7 +16,7 @@
 \item{object}{an ATO}
 
 \item{filter_vec}{a logical vector, normally created by
-\code{\link{.create_filter_vec}}.}
+\code{\link{create_filter_vec}}.}
 
 \item{exclude}{FALSE to filter by filter_vec, TRUE to exclude by filter_vec.}
 

@@ -123,7 +123,7 @@ create_filter_vec <- function(object, slt = c("ani", "dep", "det", "tag", "obs")
 #' 
 #' @param object an ATO
 #' @param filter_vec a logical vector, normally created by
-#'   \code{\link{.create_filter_vec}}.
+#'   \code{\link{create_filter_vec}}.
 #' @param exclude FALSE to filter by filter_vec, TRUE to exclude by filter_vec. 
 #' @param slt the ATO slot to filter
 #' @param hard Should the filtering mark rows as invalid (FALSE) or remove them
