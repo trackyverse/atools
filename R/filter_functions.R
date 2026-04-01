@@ -33,7 +33,7 @@ filter <- function(object, slt = c("ani", "dep", "det", "tag", "obs"),
                           slt = slt, hard = hard)
 
   if (getOption("ATO_match_immediate", default = TRUE)) {
-    object <- match_update(silent = TRUE)
+    object <- match_update(object, silent = TRUE)
   }
   return(object)
 }

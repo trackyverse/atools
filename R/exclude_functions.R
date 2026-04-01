@@ -31,13 +31,13 @@ exclude <- function(object, slt = c("ani", "dep", "det", "tag", "obs"),
     to_run <- paste0("object@", slt, " <- ATO::.ATO_", slt)
     eval(parse(text = to_run))
   } else {
-    filter_vec <- create_filter_vec(object, slt, checks)
+    filter_vec <- create_filter_vec(object, slt = slt, checks = checks)
     object <- .apply_filter(object, filter_vec, exclude = TRUE,
                             slt = slt, hard = hard)
   }
 
   if (getOption("ATO_match_immediate", default = TRUE)) {
-    object <- match_update(silent = TRUE)
+    object <- match_update(object, silent = TRUE)
   }
   return(object)
 }
