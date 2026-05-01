@@ -63,40 +63,48 @@ create_filter_vec <- function(object, slt = c("ani", "dep", "det", "tag", "obs")
   } else {
     checker <- data.table::as.data.table(slot(object, slt))
   }
-
-  # for each requested variable, check which rows would be kept
-  eval_cols <- c()
+  # check that filtering requests are appropriate
   for (i in names(checks)) {
     if (!(i %in% colnames(slot(object, slt)))) {
       warning("Variable ", i, " not found in @", slt, ". Skipping.",
               immediate. = TRUE, call. = FALSE)
+      checks[[i]] <- NULL
     } else {
-      eval_cols <- c(eval_cols, paste0("filter_check_", i))
-      if (length(checks[[i]]) == 1 && is.na(checks[[i]])) {
-        to_run <- paste0("checker[, filter_check_", i,
-                         " := is.na(", i, ")]")
-      } else {
-        if (length(checks[[i]]) == 2 &
-            (is.double(checks[[i]]) | is.integer(checks[[i]]))) {
-          to_run <- paste0("checker[, filter_check_", i,
-                           " := ",
-                           i, " >= checks[[i]][1] & ",
-                           i, " <= checks[[i]][2]]")
-        } else {
-          to_run <- paste0("checker[, filter_check_", i,
-                           " := ",
-                           i, " %in% checks[[i]]]")
-        }
+      if (!any(class(checker[[i]]) %in% class(checks[[i]]))) {
+        stop("data in ", i, " (", .comma(class(checker[[i]])),
+             ") is not of the same class as the provided filtering values (",
+             .comma(class(checks[[i]])), "). Please modify the class",
+             " of the filtering values.", call. = FALSE)
       }
-      eval(parse(text = to_run))
     }
   }
-
-  if (length(eval_cols) == 0) {
+  if (length(checks) == 0) {
     stop("None of the requested variables exist in @", slt, ".",
          call. = FALSE)
   } 
-  
+  # for each requested variable, check which rows would be kept
+  eval_cols <- c()
+  for (i in names(checks)) {
+    eval_cols <- c(eval_cols, paste0("filter_check_", i))
+    if (length(checks[[i]]) == 1 && is.na(checks[[i]])) {
+      to_run <- paste0("checker[, filter_check_", i,
+                       " := is.na(", i, ")]")
+    } else {
+      if (length(checks[[i]]) == 2 &
+          (is.double(checks[[i]]) | is.integer(checks[[i]]))) {
+        to_run <- paste0("checker[, filter_check_", i,
+                         " := ",
+                         i, " >= checks[[i]][1] & ",
+                         i, " <= checks[[i]][2]]")
+      } else {
+        to_run <- paste0("checker[, filter_check_", i,
+                         " := ",
+                         i, " %in% checks[[i]]]")
+      }
+    }
+    eval(parse(text = to_run))
+  }
+
   to_run <- paste0("checker[, filter_check_pass := ",
                    paste0(eval_cols, collapse = " & "),
                    "]")
