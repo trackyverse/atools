@@ -175,8 +175,22 @@ create_filter_vec <- function(object, slt = c("ani", "dep", "det", "tag", "obs")
               " ", longslot, " (",
               .dyn_round(new_total / old_total * 100),
               "%).")
-      # using add is an easy way to trigger the match checks again
-      object <- add(object, filtered, silent = TRUE)
+      # using set is an easy way to trigger the match checks again
+      if (slt == "ani") {
+        object <- ATO::set_ani(object, filtered, silent = TRUE)
+      }
+      if (slt == "dep") {
+        object <- ATO::set_dep(object, filtered, silent = TRUE)
+      }
+      if (slt == "det") {
+        object <- ATO::set_det(object, filtered, silent = TRUE)
+      }
+      if (slt == "tag") {
+        object <- ATO::set_tag(object, filtered, silent = TRUE)
+      }
+      if (slt == "obs") {
+        object <- ATO::set_obs(object, filtered, silent = TRUE)
+      }
       rm(filtered)
     } else {
       if (exclude) {
