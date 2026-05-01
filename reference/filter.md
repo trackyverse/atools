@@ -18,8 +18,7 @@ filter(
 
 - object:
 
-  an
-  [`ATO`](https://trackyverse.github.io/ATO/reference/ATO_package.html)
+  an [`ATO`](https://trackyverse.github.io/ATO/reference/ATO.html)
 
 - slt:
 

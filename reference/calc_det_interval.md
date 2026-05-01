@@ -12,10 +12,8 @@ calc_det_interval(object)
 
 - object:
 
-  an
-  [`ATO`](https://trackyverse.github.io/ATO/reference/ATO_package.html)
+  an [`ATO`](https://trackyverse.github.io/ATO/reference/ATO.html)
 
 ## Value
 
-an updated
-[`ATO`](https://trackyverse.github.io/ATO/reference/ATO_package.html)
+an updated [`ATO`](https://trackyverse.github.io/ATO/reference/ATO.html)

@@ -13,8 +13,7 @@ filter_datetime(object, from = "1970-01-01", to = "3000-01-01", hard = FALSE)
 
 - object:
 
-  an
-  [`ATO`](https://trackyverse.github.io/ATO/reference/ATO_package.html)
+  an [`ATO`](https://trackyverse.github.io/ATO/reference/ATO.html)
 
 - from:
 
