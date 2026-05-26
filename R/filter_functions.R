@@ -121,7 +121,7 @@ create_filter_vec <- function(object, slt = c("ani", "dep", "det", "tag", "obs")
       }
       eval(parse(text = to_run))
     }
-    checker$filter_check_pass <- NULL
+    checker[, filter_check_pass := NULL]
   }
   
   return(output)
